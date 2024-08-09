@@ -43,21 +43,33 @@ CHIP ALU {
 
     PARTS:
     // Put you code here:
+    // handling x bits
     Mux16(a=x, b=false, sel=zx, out=zxout);
     Not16(in=zxout, out=nxout);
     Mux16(a=zxout, b=nxout, sel=nx, out=xout);
 
+    // handling y bits
     // Not(in=zy, out=notzy);
     Mux16(a=y, b=false, sel=zy, out=zyout);
     Not16(in=zyout, out=nyout);
     Mux16(a=zyout, b=nyout, sel=ny, out=yout);
 
+    // computing f: x + y (if 1) or x & y (if 0)
     And16(a=xout, b=yout, out=andout);
     Add16(a=yout, b=xout, out=addout);
-
     Mux16(a=andout, b=addout, sel=f, out=fout);
 
+    // handling no: negating the out output
     Not16(in=fout, out=notfout);
-
     Mux16(a=fout, b=notfout, sel=no, out=out);
+    Mux16(a=fout, b=notfout, sel=no, out[0..7]=outLSBs, out[8..14]=outMSBs, out[15]=outMSBit);
+
+    // computing status bits
+    Or8Way(in=outLSBs, out=orL);
+    Or8Way(in[0..6]=outMSBs, in[7]=outMSBit, out=orH);
+    Or(a=orL, b=orH, out=orTot);
+    Not(in=orTot, out=zr);
+
+    // computing negative flag
+    Or(a=outMSBit, b=false, out=ng);
 }
