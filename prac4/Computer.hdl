@@ -20,4 +20,10 @@ CHIP Computer {
 
     PARTS:
     // Put your code here:
+    // gives current instruction to the CPU based on PC
+    ROM32K(address=pc, out=CPUinstruct);
+    // Executes instructions and controls data movement between ROM, Memory, and peripherals.
+    CPU(inM=memout, instruction=CPUinstruct, reset=reset, outM=outM, writeM=writeM, addressM=addressM, pc=pc);
+    // Handles data storage and retrieval, interfacing with the CPU for read/write operations.
+    Memory(in=outM, load=writeM, address=addressM, out=memout);
 }
