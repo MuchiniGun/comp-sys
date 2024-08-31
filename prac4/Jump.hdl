@@ -28,4 +28,19 @@ CHIP Jump {
 
 PARTS:
     // Put your code here:
+    // check if must jump when ALU output is < 0
+    And(a=j1, b=ng, out=jumpLess);
+
+    // checks if must jump if ALU output == 0
+    And(a=j2, b=zr, out=jumpEqual);
+
+    // checks if must jump if ALU output > 0 (j3 &! ng &! zr)
+    Not(in=ng, out=notNg);
+    Not(in=zr, out=notZr);
+    And(a=notNg, b=notZr, out=pos);
+    And(a=j3, b=pos, out=jumpGreater);
+
+    // combines everything with ORs
+    Or(a=jumpLess, b=jumpEqual, out=jumpOR);
+    Or(a=jumpOR, b=jumpGreater, out=jump);
 }

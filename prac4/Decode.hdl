@@ -26,4 +26,37 @@ CHIP Decode {
 
 PARTS:
     // Put your code here:
+    // check type of instruction (A or C)
+    // The in[15] of instruction: 0 for A-instruction, 1 for C-instruction
+    // in[15] is the 15th bit of the instruction (MSB)
+    Or(a=in[15], b=false, out=type); 
+    // notIn15 = negation of in[15]
+    Not(in=in[15], out=notIn15); 
+    
+    // If C-instruction
+     // a = bit 12 of instruction
+    And(a=in[15], b=in[12], out=a); 
+
+    // Op-code wires to ALU
+    // cX is the Xth bit of the instruction
+    And(a=in[15], b=in[11], out=c1);
+    And(a=in[15], b=in[10], out=c2);
+    And(a=in[15], b=in[9],  out=c3);
+    And(a=in[15], b=in[8],  out=c4);
+    And(a=in[15], b=in[7],  out=c5);
+    And(a=in[15], b=in[6],  out=c6);
+
+    // Destination wires
+    // dX is the Xth bit of the instruction
+    And(a=in[15], b=in[5],  out=dC);
+    Mux(a= true, b =dC, sel = in[15], out = d1);
+    And(a=in[15], b=in[4],  out=d2);
+    And(a=in[15], b=in[3],  out=d3);
+
+    // Jump wires
+    // jX is the Xth bit of the instruction
+    And(a=in[15], b=in[2],  out=j1);
+    And(a=in[15], b=in[1],  out=j2);
+    And(a=in[15], b=in[0],  out=j3);
+
 }
