@@ -1,8 +1,9 @@
-// Test case 2 for Abs.vm
+// Test case 1 for AddSub.vm
+// Calculates x = (a + b) - x with different values for a, b, and x
 
-load Abs.vm,
-output-file Abs02.out,
-compare-to Abs02.cmp,
+load AddSub.vm,
+output-file AddSub01.out,
+compare-to AddSub01.cmp,
 output-list sp%D1.6.1 local%D1.6.1 argument%D1.8.1 this%D1.6.1 that%D1.6.1
             RAM[16]%D1.6.1 RAM[17]%D1.6.1 RAM[18]%D1.6.1
             local[0]%D1.8.1 local[1]%D1.8.1 local[2]%D1.8.1
@@ -14,10 +15,19 @@ set argument 400,  // base address of the argument segment
 set this 3000,     // base address of the this segment
 set that 3010,     // base address of the that segment
 
-set RAM[16] 9,    // static 0, x = 9
-set RAM[17] 0,    // static 1, y = 0
+set RAM[16] 5,  // static 0, x = 5
+set RAM[17] 2,  // static 1
+set RAM[18] 3,  // static 2
 
-repeat 25 {
+set local[0] 15,  // local 0, a = 15
+set local[1] 25,  // local 1, b = 25
+set local[2] 35,  // local 2
+
+set argument[0] 105,  // argument 0
+set argument[1] 205,  // argument 1
+set argument[2] 305;  // argument 2
+
+repeat 25 {        // Run the VM code
   vmstep;
 }
 output;
