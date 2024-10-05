@@ -1,0 +1,4 @@
+// Test case 1 for vm_sub
+push constant 15
+push constant 9
+sub

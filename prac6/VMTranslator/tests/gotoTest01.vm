@@ -1,0 +1,6 @@
+// Test case 1 for vm_goto
+label START
+push constant 1
+goto END
+push constant 2
+label END

@@ -1,0 +1,5 @@
+// Test case 1 for vm_label
+label LOOP_START
+push constant 10
+goto LOOP_END
+label LOOP_END

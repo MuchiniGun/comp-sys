@@ -1,0 +1,5 @@
+// Test case 2 for vm_return
+function secondary 3
+push constant 30
+call secondary 1
+return

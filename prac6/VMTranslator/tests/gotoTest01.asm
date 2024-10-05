@@ -1,0 +1,16 @@
+(START)
+@1
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+@END
+0;JMP
+@2
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
+(END)

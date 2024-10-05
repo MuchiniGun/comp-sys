@@ -1,0 +1,6 @@
+// Test case 1 for vm_return
+function main 2
+push constant 10
+push constant 20
+call main 2
+return

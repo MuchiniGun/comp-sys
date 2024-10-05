@@ -1,0 +1,5 @@
+// Test case 2 for vm_if
+push constant 1
+if-goto LABEL1
+push constant 2
+label LABEL1

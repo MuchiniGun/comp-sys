@@ -1,0 +1,5 @@
+// Test case 1 for vm_push
+push constant 10
+push constant 22
+push local 1
+push argument 2

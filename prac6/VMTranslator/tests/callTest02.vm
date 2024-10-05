@@ -1,0 +1,4 @@
+// Test case 2 for vm_call
+push constant 10
+push constant 15
+call secondary 2

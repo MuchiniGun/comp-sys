@@ -1,0 +1,4 @@
+// Test case 1 for vm_and
+push constant 7   // 0111 in binary
+push constant 14  // 1110 in binary
+and

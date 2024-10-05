@@ -1,0 +1,4 @@
+// Test case 1 for vm_pop
+pop temp 5
+pop local 0
+pop argument 1
