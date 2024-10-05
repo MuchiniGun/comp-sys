@@ -2,4 +2,35 @@
 // n is supplied as an argument
 
 // Put your code here.
+// For n >= 2, Fib(n) = Fib(n-1) + Fib(n-2)
 
+function Fib.fib 0
+
+// (base case) --> n >= 2
+push argument 0      // Push n (argument 0) onto the stack
+push constant 2      // Push the constant 2 onto the stack
+lt                   // check if n < 2
+if-goto stop         // If n < 2, jump to the stop label and return n
+
+// calculate Fib(n-1)
+push argument 0      // Push n onto stack
+push constant 1      // Push the constant 1 onto stack
+sub                  // n-1
+call Fib.fib 1       // (n-1) as arg
+
+// calculate Fib(n-2)
+push argument 0      // Push n onto stack
+push constant 2      // Push the constant 2 onto stack
+sub                  // n-2
+call Fib.fib 1       // (n-2) as arg
+
+// Adding Fib(n-1) and Fib(n-2)
+add
+
+// Return the sum
+return
+
+
+label stop
+push argument 0      
+return              
