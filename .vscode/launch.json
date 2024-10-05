@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/muchinigun/Library/CloudStorage/Dropbox/University/Australia/UniAdelaide/Year2/Semester2/comp_sys/assignments",
-      "program": "/Users/muchinigun/Library/CloudStorage/Dropbox/University/Australia/UniAdelaide/Year2/Semester2/comp_sys/assignments/build/Debug/outDebug"
+      "cwd": "/Users/muchinigun/Library/CloudStorage/Dropbox/University/Australia/UniAdelaide/Year2/Semester2/comp_sys/assignments/prac6/VMTranslator",
+      "program": "/Users/muchinigun/Library/CloudStorage/Dropbox/University/Australia/UniAdelaide/Year2/Semester2/comp_sys/assignments/prac6/VMTranslator/build/Debug/outDebug"
     }
   ]
 }
