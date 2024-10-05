@@ -1,10 +1,114 @@
-// Calculates a = x*y
+// Multiplies a = x * y
 // a is a local variable
 // x & y are static variables
 
-// Put your code here.
+// Store x and y in temp 0 and temp 1
+push static 0          // Load x onto stack
+pop temp 0             // Store x in temp 0 for later
+push static 1          // Load y onto stack
+pop temp 1             // Store y in temp 1 for later
+push constant 0
+pop local 0
 
+// Check if either x or y is zero
+push temp 0 
+push constant 0
+eq                     // Check if x == 0
+if-goto ZERO_CHECK     // If x == 0, jump to ZERO_CHECK
 
+push temp 1            // Load y from temp 1
+push constant 0
+eq                     // Check if y == 0
+if-goto ZERO_CHECK     // If y == 0, jump to ZERO_CHECK
 
-label END
-goto END
+// Check if y is negative
+push temp 1            // Load y from temp 1
+push constant 0
+lt                     // Check if y < 0
+if-goto NEGATIVE_CASE  // If y < 0, jump to NEGATIVE_CASE
+
+// Check if x is negative
+push temp 0            // Load x from temp 0
+push constant 0
+lt                     // Check if x < 0
+if-goto MAIN_LOOP      // If x < 0, jump to MAIN_LOOP to perform the multiplication
+
+// Check if swap is necessary
+push static 1          // Push y onto stack
+push static 0          // Push x onto stack
+gt                     // Check if y > x to decide whether to swap
+if-goto SWAP_VALUES    // If y > x, swap the values
+goto MAIN_LOOP         // If no swap needed, jump to MAIN_LOOP
+
+label SWAP_VALUES
+push static 1
+pop temp 0             // Store y in temp 0
+push static 0
+pop temp 1             // Store x in temp 1
+push constant 0        // Reset a
+pop local 0            // Store the reset value in local 0
+goto MAIN_LOOP         // start the multiplication
+
+label MAIN_LOOP
+push temp 0
+push local 0 
+add                    // Add x to a
+pop local 0
+push temp 1
+push constant 1
+sub                    // Decrement y by 1
+pop temp 1
+push constant 0
+push temp 1
+eq                     // Check if y == 0
+not                    // Invert the result, continue looping if y != 0
+if-goto MAIN_LOOP      // If y != 0, continue the loop
+goto END_LABEL         // If y == 0, exit the loop
+
+label NEGATIVE_CASE
+push temp 0
+push constant 0 
+lt                     // Check if x < 0
+if-goto SECOND_NEGATIVE_CASE // If x < 0, go to SECOND_NEGATIVE_CASE
+
+push temp 1
+neg                    // Negate y
+pop temp 1 
+goto NEGATIVE_LOOP     // Go to NEGATIVE_LOOP to perform the multiplication
+
+label NEGATIVE_LOOP
+push local 0
+push temp 1 
+add                    // Add y to a
+pop local 0
+push temp 0 
+push constant 1
+sub                    // Decrement x by 1
+pop temp 0
+push constant 0
+push temp 0
+eq                     // Check if x == 0
+not                    // Invert the result 
+if-goto NEGATIVE_LOOP  // If x != 0, continue the loop
+
+push local 0           // Load a (local 0)
+neg                    // Negate a
+pop local 0            // Store the negated value in local 0
+goto END_LABEL         // Exit the loop
+
+label SECOND_NEGATIVE_CASE
+push temp 0
+neg                    // Negate x, positive
+pop temp 0
+push temp 1            // Load y from temp 1
+neg                    // Negate y, positive y
+pop temp 1             // Store the negated y in temp 1
+goto MAIN_LOOP         // Go to MAIN_LOOP for the multiplication
+
+label ZERO_CHECK
+push constant 0
+pop local 0
+goto END_LABEL         // Exit the loop
+
+label END_LABEL
+goto END_LABEL
