@@ -9,22 +9,22 @@ output-list sp%D1.6.1 local%D1.6.1 argument%D1.8.1 this%D1.6.1 that%D1.6.1
             argument[0]%D1.11.1 argument[1]%D1.11.1 argument[2]%D1.11.1;
 
 set sp 256,        // stack pointer
-set local 300,     // base address of the local segment
-set argument 400,  // base address of the argument segment
-set this 3000,     // base address of the this segment
-set that 3010,     // base address of the that segment
+set local 300,     // local segment base address
+set argument 400,  // argument segment base address
+set this 3000,     // this segment base address
+set that 3010,     // that segment base address
 
-set RAM[16] 3,  // static 0
-set RAM[17] 1,  // static 1
-set RAM[18] 2,  // static 2
+set RAM[16] 170,
+set RAM[17] 2,
+set RAM[18] 3,
 
-set local[0] 5,  // local 0
-set local[1] 8,  // local 1
-set local[2] 10,  // local 2
+set local[0] 150,
+set local[1] 180,
+set local[2] 5,
 
-set argument[0] 80,  // argument 0
-set argument[1] 90,  // argument 1
-set argument[2] 100;  // argument 2
+set argument[0] 100,
+set argument[1] 200,
+set argument[2] 300;
 
 repeat 25 {
   vmstep;
