@@ -2,4 +2,67 @@
 // a & b are both supplied as arguments
 
 // Put your code here.
+// m = array pointer
+// n = num elements
 
+function ArrMax.arrMax 3
+
+// store the array pointer in local 0
+push argument 0
+pop local 0
+push local 0
+
+// load the first element of the array into local 1 (max value)
+pop pointer 1    // set 'that' to arr[0]
+push that 0
+pop local 1      // store arr[0] as the initial max value
+
+// store n-1 in local 2 --> the counter
+push argument 1
+push constant 1
+sub
+pop local 2      // n - 1
+
+// loops over the array
+label LOOP_START
+
+// if no more elements to check, exit the loop
+push local 2
+push constant 0
+eq
+if-goto LOOP_END
+
+// increment the array pointer
+push local 0
+push constant 1
+add
+pop local 0
+
+// load the next element and compare it to the current max
+push local 0
+pop pointer 1    // 'that' points to arr[i]
+push that 0
+push local 1
+gt
+if-goto UPDATE_MAX
+
+// move to the next iteration if current element is not larger
+goto CONTINUE_LOOP
+
+// update max if the current element is larger
+label UPDATE_MAX
+push that 0
+pop local 1      //  max = arr[i]
+
+// continue to the next iteration
+label CONTINUE_LOOP
+push local 2
+push constant 1
+sub
+pop local 2      // decrement counter
+goto LOOP_START  // repeat loop
+
+// return the maximum value
+label LOOP_END
+push local 1     // push max value
+return
